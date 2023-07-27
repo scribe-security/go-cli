@@ -13,24 +13,6 @@ mkdir -p "$ROUND0_DIR"
 mkdir -p "$ROUND1_DIR"
 mkdir -p "$ROUND2_DIR"
 
-# $CLI ../protobom/examples/nginx.spdx.json -f cyclonedx > $ROUND1_DIR/nginx.cdx.json
-
-# $CLI ../protobom/examples_rd1/nginx.cdx.json -f spdx >  $ROUND2_DIR/nginx.spdx.json
-
-
-# for FILENAME in "$SOURCE_DIR"/*.spdx.json; do
-#     [ -e "$FILENAME" ] || continue  # Check if any files match the pattern
-
-#     FILE_BASE=$(basename "$FILENAME" .spdx.json)
-
-#     # Round 1: Convert SPDX to CycloneDX
-#     "$CLI" "$FILENAME" -f cyclonedx > "$ROUND1_DIR/$FILE_BASE.cdx.json"
-
-#     # Round 2: Convert CycloneDX back to SPDX
-#     "$CLI" "$ROUND1_DIR/$FILE_BASE.cdx.json" -f spdx > "$ROUND2_DIR/$FILE_BASE.spdx.json"
-# done
-
-
 # Sort and copy original files to rd0 directory
 for FILENAME in "$SOURCE_DIR"/*.spdx.json "$SOURCE_DIR"/*.cdx.json; do
     [ -e "$FILENAME" ] || continue  # Check if any files match the pattern
