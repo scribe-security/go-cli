@@ -22,19 +22,16 @@ sort_json_keys() {
 
 def sort_json(data):
     if isinstance(data, list):
-        # Check if the list contains dictionaries with a "fileName" field
         has_filename = any(isinstance(item, dict) and "fileName" in item for item in data)
         if has_filename:
-            # Sort the list based on the "fileName" field
             data.sort(key=lambda item: item.get("fileName", ""))
-            return [sort_json(item) for item in data]
-        else:
-            return [sort_json(item) for item in data]
+        return [sort_json(item) for item in data]
     elif isinstance(data, dict):
-        return {k: sort_json(v) for k, v in sorted(data.items(), key=lambda item: str(item[0]))}
+        sorted_items = sorted(data.items(), key=lambda item: (item[0] != "fileName", str(item[0])))
+        return {k: sort_json(v) for k, v in sorted_items}
     else:
         return data
-
+        
 data = json.load(sys.stdin)
 sorted_data = sort_json(data)
 print(json.dumps(sorted_data, indent=2))'
